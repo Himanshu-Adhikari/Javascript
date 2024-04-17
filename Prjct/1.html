@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Add styles for better appearance */
+        .bg-dark {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            margin: 20px;
+        }
+        .warning {
+            border: 2px solid yellow;
+            padding: 10px;
+        }
+        .heading {
+            color: yellow;
+        }
+        .list-grp {
+            list-style-type: none;
+            padding: 0;
+        }
+        .li-items {
+            margin-bottom: 5px;
+        }
+        .price {
+            color: green;
+            margin-left: 10px;
+        }
+        .btn {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-dark">
+        <div class="warning">
+            <h1 class="heading">learn</h1>
+            <ul class="list-grp">
+                <!-- This is where the dynamically generated list items will go -->
+            </ul>
+            <button type="button" class="btn">Sort</button>
+        </div>
+    </div>
+    <div class="Cnt">
+        <label for="add">Add elements</label>
+        <input type="text" name="CourseName" id="add1">
+        <input type="number" name="Price" id="add2">
+        <button type="button" class="additems">Add</button>
+    </div>
+    <script>
+        const arr=[
+            {
+                name:"himanshu", price:300
+            },
+            {
+                name:"Adhikari", price:121
+            },
+            {
+                name:"AATkat", price:3298
+            }
+        ];
+
+        function generateList() {
+            const itm = document.querySelector(".list-grp");
+            itm.innerHTML = ''; // Clear existing list items
+            arr.forEach((course) => {
+                const li = document.createElement("li");
+                li.classList.add("li-items");
+
+                const name = document.createTextNode(course.name);
+                li.appendChild(name);
+
+                const span = document.createElement("span");
+                span.classList.add("price");
+
+                const price = document.createTextNode(course.price + " $");
+                span.appendChild(price);
+
+                li.appendChild(span);
+
+                itm.appendChild(li);
+            });
+        }
+
+        generateList(); // Initial generation of list
+
+        const btn = document.querySelector(".btn");
+        btn.addEventListener("click", () => {
+            arr.sort((a, b) => a.price - b.price);
+            generateList(); // Re-generate list after sorting
+        });
+        var addbtn=document.querySelector(".additems");
+        addbtn.addEventListener("click",()=>{
+            var k=document.getElementById("add1").value;
+            var l=document.getElementById("add2").value;
+            arr.push({name:k,price:l});
+            generateList();
+        });
+    </script>
+</body>
+</html>

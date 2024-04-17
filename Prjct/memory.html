@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: #fafa4d;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 600px;
+            height: 600px;
+            flex-wrap: wrap;
+            perspective: 1000px;
+            justify-content: center;
+        }
+
+        .card {
+            width: 23%;
+            height: 23%;
+            margin: 5px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.3s;
+            cursor: pointer;
+            background-color: transparent;
+        }
+
+        .card:active {
+            transform: scale(0.95);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card.flip .front {
+            transform: rotateY(180deg);
+            visibility: visible;
+        }
+
+        .card.flip .back {
+            transform: rotateY(180deg);
+            visibility: hidden;
+            transition: transform 0.6s ease;
+
+        }
+
+        .front,
+        .back {
+            background-color: rgb(1, 21, 38);
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            position: absolute;
+            transition: transform 0.6s ease;
+        }
+
+       
+    </style>
+
+</head>
+
+<body>
+    <h1>Guess Game</h1>
+    <div class="container">
+        <div class="card" data-image="e1">
+            <img src="./emojis/e1.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e1">
+            <img src="./emojis/e1.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e2">
+            <img src="./emojis/e2.png" class="front">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e2">
+            <img src="./emojis/e2.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e3">
+            <img src="./emojis/e3.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e3">
+            <img src="./emojis/e3.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e4">
+            <img src="./emojis/e4.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e4">
+            <img src="./emojis/e4.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e5">
+            <img src="./emojis/e5.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e5">
+            <img src="./emojis/e5.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e6">
+            <img src="./emojis/e6.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e6">
+            <img src="./emojis/e6.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e7">
+            <img src="./emojis/e7.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e7">
+            <img src="./emojis/e7.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e8">
+            <img src="./emojis/e8.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+        <div class="card" data-image="e8">
+            <img src="./emojis/e8.png" class="front" alt="e1">
+            <img src="./emojis/pexels-pixabay-36717.jpg" class="back">
+        </div>
+    </div>
+    <script>
+        const cards = document.querySelectorAll(".card");
+        let isFlipped = false;
+        let firstCard, secondCard;
+
+        cards.forEach((card) => {
+            card.addEventListener("click", flipCard);
+        })
+
+        function flipCard() {
+            if (!isFlipped) {
+                isFlipped = true;
+                this.classList.add("flip");
+                firstCard = this;
+            } else {
+                isFlipped = false;
+                this.classList.add("flip");
+                secondCard = this;
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            if (firstCard.dataset.image === secondCard.dataset.image) {
+                success();
+            } else {
+                fail();
+            }
+        }
+
+        function success() {
+            firstCard.removeEventListener('click', flipCard);
+            secondCard.removeEventListener('click', flipCard);
+            resetCards();
+        }
+
+        function fail() {
+            setTimeout(() => {
+                firstCard.classList.remove("flip");
+                secondCard.classList.remove("flip");
+                resetCards();N
+            }, 500);
+        }
+
+        function resetCards() {
+            isFlipped = false;
+            firstCard = null;
+            secondCard = null;
+        }
+        function shuffle(){
+            cards.forEach((card)=>{
+                var id=Math.floor(Math.random()*16);
+                card.style.order=id;
+            })
+        };
+        shuffle();
+     
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(66, 66, 66);
+            align-items: center;
+            min-height: 400px;
+            text-align: center;
+            color: aliceblue;
+        }
+        .description{
+            transition: 0.9s ease-in-out;
+        }
+        .re{
+            height: 1px;
+            width: 30px;
+            background-color: aliceblue;
+            margin-left: 360px;
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+   <div id="cnt">
+    <h1 class="counter">0</h1>
+    <div class="re"></div>
+    <p class="Fol">Followers</p>
+   </div> 
+   <script>
+    var a=document.querySelector(".counter");
+    var b=document.querySelector(".Fol");
+    let counter=1;
+    setInterval(()=>{
+        if(counter==1000)return;
+        counter++;
+        a.innerText=counter;
+    },1);
+    setTimeout(()=>{
+        if(a.innerText==1000){
+            b.innerText="Hogye hazaar";
+        }
+    },4500);
+   </script>
+</body>
+</html>
